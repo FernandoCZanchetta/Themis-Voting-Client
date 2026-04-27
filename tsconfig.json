@@ -26,7 +26,8 @@
       "@models": ["models/index.ts"],      
       "@pipes": ["pipes/index.ts"],
       "@services": ["services/index.ts"],
-      "@shared": ["shared/index.ts"]
+      "@shared": ["shared/index.ts"],
+      "@utils": ["utils/index.ts"]
     }
   },
   "angularCompilerOptions": {
