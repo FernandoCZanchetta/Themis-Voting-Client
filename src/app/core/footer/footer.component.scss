@@ -1,0 +1,15 @@
+@use '/src/colors';
+
+footer section:last-of-type {
+  border-top: solid 1px colors.$gray-700;
+}
+
+div.links * {
+  text-decoration: none;
+}
+
+footer section:last-of-type a,
+footer section:last-of-type a:link,
+footer section:last-of-type a:visited {
+  color: colors.$primary !important;
+}
