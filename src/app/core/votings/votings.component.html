@@ -1,7 +1,7 @@
 <div class="votings-page">
   <h2>Votações Ativas</h2>
 
-  <p>Selecione a votação da qual você deseja participar: </p>
+  <p>Selecione a votação da qual você deseja participar:</p>
 
   <div *ngIf="loading" class="status-box loading">
     <i class="fas fa-spinner fa-spin"></i>
@@ -33,7 +33,6 @@
       *ngFor="let voting of votings"
       (click)="openVoting(voting.id)"
     >
-
       <h3>{{ voting.name }}</h3>
 
       <p class="desc">
@@ -45,9 +44,7 @@
         <span>Fim: {{ formatDate(voting.endAt) }}</span>
       </div>
 
-      <button>
-        Acessar Votação
-      </button>
+      <button>Acessar Votação</button>
     </div>
   </div>
 </div>

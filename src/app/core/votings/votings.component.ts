@@ -16,7 +16,10 @@ export class VotingsComponent implements OnInit {
 
   formatDate = formatDate
 
-  constructor(private votingService: VotingService, private router: Router) {}
+  constructor(
+    private votingService: VotingService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.loading = false

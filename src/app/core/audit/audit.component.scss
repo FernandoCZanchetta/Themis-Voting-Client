@@ -23,7 +23,7 @@
 
 .form input:focus {
   border-color: #3b82f6;
-  box-shadow: 0 0 0 2px rgba(59,130,246,0.2);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
 }
 
 .form button {
@@ -55,8 +55,8 @@
   border-radius: 12px;
   height: 400px;
   overflow-y: auto;
-  font-family: "Cutive Mono", monospace;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  font-family: 'Cutive Mono', monospace;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .terminal .line {
@@ -85,8 +85,14 @@
 }
 
 @keyframes blink {
-  0%, 50% { opacity: 1 }
-  50%, 100% { opacity: 0 }
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
 }
 
 .error {

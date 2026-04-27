@@ -73,23 +73,27 @@ export class VotingDetailsComponent implements OnInit {
   }
 
   vote() {
-    if (!this.selectedOptionId || !this.voting) { return }
+    if (!this.selectedOptionId || !this.voting) {
+      return
+    }
     this.voteStatus = 'idle'
 
-    this.votingService.vote(this.voting.id, {
-      optionId: this.selectedOptionId,
-    }).subscribe({
-      next: res => {
-        this.receiptData = res
-        this.voteStatus = 'success'
-        // this.modal.title = 'Sucesso! Voto Registrado!'
-      },
-      error: () => {
-        this.receiptData = undefined
-        this.voteStatus = 'error'
-        // this.modal.title = 'Erro! Vote Novamente!'
-      },
-    })
+    this.votingService
+      .vote(this.voting.id, {
+        optionId: this.selectedOptionId,
+      })
+      .subscribe({
+        next: res => {
+          this.receiptData = res
+          this.voteStatus = 'success'
+          // this.modal.title = 'Sucesso! Voto Registrado!'
+        },
+        error: () => {
+          this.receiptData = undefined
+          this.voteStatus = 'error'
+          // this.modal.title = 'Erro! Vote Novamente!'
+        },
+      })
 
     // this.redirectAfterClose = true
     // this.openModal = true
@@ -123,7 +127,9 @@ export class VotingDetailsComponent implements OnInit {
   }
 
   goToAudit() {
-    if (!this.receiptData) { return }
+    if (!this.receiptData) {
+      return
+    }
 
     this.router.navigate(['/audit'], {
       queryParams: {

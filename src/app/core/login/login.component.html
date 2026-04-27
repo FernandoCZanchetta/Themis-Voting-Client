@@ -3,31 +3,17 @@
     <h1>Themis Voting</h1>
     <p class="subtitle">Secure voting system!</p>
     <form [formGroup]="form" (ngSubmit)="login()">
+      <input type="text" placeholder="nUSP" formControlName="nUSP" />
 
-      <input
-        type="text"
-        placeholder="nUSP"
-        formControlName="nUSP"
-      />
+      <input type="password" placeholder="Senha Única" formControlName="uniquePassword" />
 
-      <input
-        type="password"
-        placeholder="Senha Única"
-        formControlName="uniquePassword"
-      />
-
-      <button
-        type="submit"
-        [disabled]="loading"
-      >
+      <button type="submit" [disabled]="loading">
         {{ loading ? 'Loggin In...' : 'Login' }}
       </button>
-
     </form>
 
     <p class="error" *ngIf="error">
       {{ error }}
     </p>
-
   </div>
 </div>

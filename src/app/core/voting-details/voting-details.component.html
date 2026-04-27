@@ -4,7 +4,6 @@
 </div>
 
 <div class="voting-details" *ngIf="!loading && voting">
-
   <h2>{{ voting!.name }}</h2>
 
   <p class="description">
@@ -16,16 +15,11 @@
     <span>Fim: {{ formatDate(voting!.endAt) }}</span>
   </div>
 
-  <button
-    *ngIf="!isVotingStarted"
-    class="vote-button"
-    (click)="startVoting()"
-  >
+  <button *ngIf="!isVotingStarted" class="vote-button" (click)="startVoting()">
     Iniciar Votação
   </button>
 
   <div *ngIf="isVotingStarted && voteStatus === 'idle'">
-
     <h3>Escolha uma Opção:</h3>
 
     <div class="options">
@@ -39,20 +33,18 @@
       </div>
     </div>
 
-    <button
-      class="vote-button"
-      [disabled]="!selectedOptionId"
-      (click)="vote()"
-    >
+    <button class="vote-button" [disabled]="!selectedOptionId" (click)="vote()">
       Confirmar Voto
     </button>
-
   </div>
 </div>
 
 <div *ngIf="voteStatus === 'success' && receiptData" class="receipt">
   <h3>Voto registrado com sucesso!</h3>
-  <p>Guarde bem estas informações abaixo, pois elas são a única maneira de auditar o seu voto!</p>
+  <p>
+    Guarde bem estas informações abaixo, pois elas são a única maneira de auditar o seu
+    voto!
+  </p>
 
   <p><strong>Hash:</strong></p>
   <code>{{ receiptData.hash }}</code>
@@ -71,7 +63,10 @@
   <i class="fas fa-exclamation-triangle"></i>
   <div>
     <strong>Erro ao registrar voto!</strong>
-    <p>Tente novamente. Se o problema persistir, verifique sua conexão ou entre em contato conosco.</p>
+    <p>
+      Tente novamente. Se o problema persistir, verifique sua conexão ou entre em contato
+      conosco.
+    </p>
   </div>
 </div>
 

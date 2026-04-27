@@ -4,21 +4,26 @@
     <input formControlName="nonce" placeholder="Nonce" />
     <input formControlName="signature" placeholder="Signature" />
 
-    <button (click)="startAudit()" [disabled]="state === 'running'">
-      Auditar Voto
-    </button>
+    <button (click)="startAudit()" [disabled]="state === 'running'">Auditar Voto</button>
   </div>
 
   <div class="terminal">
-    <div *ngFor="let line of lines" 
+    <div
+      *ngFor="let line of lines"
       [ngClass]="{
-        'line': true,
-        'error': line.startsWith('error:'),
-        'success': line.startsWith('success:'),
-        'warn': line.startsWith('warn')
-      }">
-
-      {{ line.replace('error:', '').replace('success:', '').replace('warn:', '').replace('default:', '') }}
+        line: true,
+        error: line.startsWith('error:'),
+        success: line.startsWith('success:'),
+        warn: line.startsWith('warn'),
+      }"
+    >
+      {{
+        line
+          .replace('error:', '')
+          .replace('success:', '')
+          .replace('warn:', '')
+          .replace('default:', '')
+      }}
     </div>
   </div>
 </div>

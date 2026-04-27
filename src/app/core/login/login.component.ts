@@ -17,7 +17,11 @@ export class LoginComponent {
     uniquePassword: new FormControl('', [Validators.required]),
   })
 
-  constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   login() {
     if (this.form.invalid) {

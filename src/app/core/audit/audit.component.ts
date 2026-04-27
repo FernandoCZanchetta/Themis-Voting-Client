@@ -16,12 +16,24 @@ export class AuditComponent implements OnInit {
   result?: AuditVoteResponse
 
   form = new FormGroup({
-    hash: new FormControl<string>('', {nonNullable: true, validators: [Validators.required]}),
-    nonce: new FormControl<string>('', {nonNullable: true, validators: [Validators.required]}),
-    signature: new FormControl<string>('', {nonNullable: true, validators: [Validators.required]}),
+    hash: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    nonce: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    signature: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
   })
 
-  constructor(private auditService: AuditService, private route: ActivatedRoute) {}
+  constructor(
+    private auditService: AuditService,
+    private route: ActivatedRoute
+  ) {}
 
   /* eslint-disable dot-notation */
   ngOnInit() {
@@ -35,7 +47,10 @@ export class AuditComponent implements OnInit {
   }
   /* eslint-enable dot-notation */
 
-  private addToTerminal(line: string, type: 'default' | 'error' | 'success' | 'warn' = 'default') {
+  private addToTerminal(
+    line: string,
+    type: 'default' | 'error' | 'success' | 'warn' = 'default'
+  ) {
     this.lines.push(`${type}:${line}`)
   }
 
@@ -48,7 +63,10 @@ export class AuditComponent implements OnInit {
 
     if (this.form.invalid) {
       this.state = 'error'
-      this.addToTerminal('✖ Por favor, preencha todos os campos para auditar o voto...', 'error')
+      this.addToTerminal(
+        '✖ Por favor, preencha todos os campos para auditar o voto...',
+        'error'
+      )
       return
     }
 
@@ -88,7 +106,7 @@ export class AuditComponent implements OnInit {
         this.result = res
 
         if (res.valid) {
-          if(res.revoked) {
+          if (res.revoked) {
             this.addToTerminal('⚠️ VOTO REVOGADO', 'warn')
           } else {
             this.addToTerminal('✔ VOTO VÁLIDO', 'success')
