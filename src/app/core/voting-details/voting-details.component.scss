@@ -1,0 +1,202 @@
+.voting-details {
+  padding: 2rem;
+  color: #111827;
+}
+
+h2 {
+  margin-bottom: 0.5rem;
+}
+
+.description {
+  margin-bottom: 1rem;
+  color: #4b5563;
+}
+
+.meta {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 20px;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 2rem;
+}
+
+.option-card {
+  padding: 14px;
+  border-radius: 10px;
+  background: #0f172a;
+  color: #f9fafb;
+  cursor: pointer;
+  transition: 0.2s;
+  text-align: center;
+}
+
+.option-card:hover {
+  background: #3e4e64;
+}
+
+.option-card.selected {
+  border: 3px solid #b39620;
+  background: #15367e;
+}
+
+.vote-button {
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #3b82f6;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+}
+
+.vote-button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  margin-top: 20px;
+  padding: 14px 16px;
+
+  background: #020617;
+  border: 1px solid #7f1d1d;
+  border-left: 4px solid #ef4444;
+
+  border-radius: 10px;
+
+  color: #fca5a5;
+
+  i {
+    font-size: 18px;
+    color: #ef4444;
+    margin-top: 2px;
+  }
+
+  strong {
+    display: block;
+    color: #ef4444;
+    font-size: 14px;
+  }
+
+  p {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: #fca5a5;
+  }
+
+  animation: fadeIn 0.3s ease;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.back-button {
+  margin-bottom: 1rem;
+  background: transparent;
+  border: none;
+  color: #3b82f6;
+  cursor: pointer;
+  font-weight: 500;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.back-button:hover {
+  text-decoration: underline;
+}
+
+.receipt {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.receipt p {
+  margin: 0;
+  font-size: 18px;
+}
+
+.receipt code {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 10px;
+  border-radius: 8px;
+  display: block;
+  font-family: "Cutive Mono", monospace;
+  font-size: 15px;
+  word-break: break-all;
+}
+
+.receipt code::before {
+  content: '> ';
+  color: #64748b;
+}
+
+.receipt button {
+  margin-top: 6px;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #3b82f6;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.receipt button:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.receipt .audit-btn {
+  margin-top: 6px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #87aadc;
+  border: 1px solid #31496b;
+  color: #0f3a75;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.receipt .audit-btn:hover {
+  border-color: #3b82f6;
+  color: #9abef9;
+  transform: translateY(-1px);
+}
+
+.btn-close {
+  opacity: 0.6;
+  transition: 0.2s ease;
+}
+
+.btn-close:hover {
+  opacity: 1;
+}
+
+.modal-body .error {
+  color: #ef4444;
+  font-weight: 500;
+}

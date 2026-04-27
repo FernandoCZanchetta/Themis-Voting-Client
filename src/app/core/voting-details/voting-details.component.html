@@ -1,0 +1,97 @@
+<div class="back-button" (click)="goBack()">
+  <i class="fas fa-chevron-left"></i>
+  <span>Votações</span>
+</div>
+
+<div class="voting-details" *ngIf="!loading && voting">
+
+  <h2>{{ voting!.name }}</h2>
+
+  <p class="description">
+    {{ voting!.description }}
+  </p>
+
+  <div class="meta">
+    <span>Início: {{ formatDate(voting!.startAt) }}</span>
+    <span>Fim: {{ formatDate(voting!.endAt) }}</span>
+  </div>
+
+  <button
+    *ngIf="!isVotingStarted"
+    class="vote-button"
+    (click)="startVoting()"
+  >
+    Iniciar Votação
+  </button>
+
+  <div *ngIf="isVotingStarted && voteStatus === 'idle'">
+
+    <h3>Escolha uma Opção:</h3>
+
+    <div class="options">
+      <div
+        class="option-card"
+        *ngFor="let option of voting!.votingOptions"
+        [class.selected]="selectedOptionId === option.id"
+        (click)="selectOption(option.id)"
+      >
+        {{ option.label }}
+      </div>
+    </div>
+
+    <button
+      class="vote-button"
+      [disabled]="!selectedOptionId"
+      (click)="vote()"
+    >
+      Confirmar Voto
+    </button>
+
+  </div>
+</div>
+
+<div *ngIf="voteStatus === 'success' && receiptData" class="receipt">
+  <h3>Voto registrado com sucesso!</h3>
+  <p>Guarde bem estas informações abaixo, pois elas são a única maneira de auditar o seu voto!</p>
+
+  <p><strong>Hash:</strong></p>
+  <code>{{ receiptData.hash }}</code>
+
+  <p><strong>Nonce:</strong></p>
+  <code>{{ receiptData.nonce }}</code>
+
+  <p><strong>Signature:</strong></p>
+  <code>{{ receiptData.signature }}</code>
+
+  <button (click)="copyVoteReceipt()">Copiar Comprovante de Voto</button>
+  <button class="audit-btn" (click)="goToAudit()">Auditar Voto</button>
+</div>
+
+<div *ngIf="voteStatus === 'error'" class="error">
+  <i class="fas fa-exclamation-triangle"></i>
+  <div>
+    <strong>Erro ao registrar voto!</strong>
+    <p>Tente novamente. Se o problema persistir, verifique sua conexão ou entre em contato conosco.</p>
+  </div>
+</div>
+
+<!-- <app-modal
+  [(isOpen)]="openModal"
+  (isOpenChange)="onModalChange($event)"
+  [title]="modal.title"
+>
+  <div *ngIf="voteStatus === 'success' && receiptData" class="receipt">
+    <p>Guarde bem estas informações abaixo, pois elas são a única maneira de auditar o seu voto!</p>
+
+    <p><strong>Hash:</strong></p> <code>{{ receiptData.voteHash }}</code>
+    <p><strong>Nonce:</strong></p> <code>{{ receiptData.nonce }}</code>
+    <p><strong>Signature:</strong></p> <code>{{ receiptData.voteSignature }}</code>
+
+    <button (click)="copyVoteReceipt()">Copiar Comprovante de Voto</button>
+    <button class="audit-btn" (click)="goToAudit()">Auditar Voto</button>
+  </div>
+
+  <div *ngIf="voteStatus === 'error'" class="error">
+    <p>Não foi possível registrar seu voto. Tente novamente.</p>
+  </div>
+</app-modal> -->
