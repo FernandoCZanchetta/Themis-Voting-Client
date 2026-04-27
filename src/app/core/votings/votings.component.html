@@ -1,0 +1,53 @@
+<div class="votings-page">
+  <h2>Votações Ativas</h2>
+
+  <p>Selecione a votação da qual você deseja participar: </p>
+
+  <div *ngIf="loading" class="status-box loading">
+    <i class="fas fa-spinner fa-spin"></i>
+    <div>
+      <strong>Carregando votações...</strong>
+      <p>Aguarde enquanto buscamos os dados.</p>
+    </div>
+  </div>
+
+  <div *ngIf="error && !loading" class="status-box error">
+    <i class="fas fa-exclamation-triangle"></i>
+    <div>
+      <strong>Erro ao carregar votações...</strong>
+      <p>{{ error }}</p>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && !error && votings.length === 0" class="status-box empty">
+    <i class="fas fa-info-circle"></i>
+    <div>
+      <strong>Nenhuma votação disponível!</strong>
+      <p>Não há votações ativas no momento.</p>
+    </div>
+  </div>
+
+  <div class="voting-grid" *ngIf="!loading && !error && votings.length > 0">
+    <div
+      class="voting-card"
+      *ngFor="let voting of votings"
+      (click)="openVoting(voting.id)"
+    >
+
+      <h3>{{ voting.name }}</h3>
+
+      <p class="desc">
+        {{ voting.description }}
+      </p>
+
+      <div class="meta">
+        <span>Início: {{ formatDate(voting.startAt) }}</span>
+        <span>Fim: {{ formatDate(voting.endAt) }}</span>
+      </div>
+
+      <button>
+        Acessar Votação
+      </button>
+    </div>
+  </div>
+</div>
