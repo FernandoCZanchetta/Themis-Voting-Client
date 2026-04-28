@@ -1,3 +1,27 @@
+<app-page-title></app-page-title>
+
+<section class="text-justify m-auto">
+  <p><strong>Bem vindo à área de auditoria!</strong></p>
+  <p>
+    Para auditar seu voto, preencha os dados do seu comprovante de votação nos campos
+    abaixo e aguarde a validação!
+  </p>
+  <p>
+    O sistema irá conferir as informações em nosso servidor, de forma a confirmar se o
+    mesmo é válido ou se há alguma inconsistência! Se o procedimento foi realizado
+    corretamente, você verá alguns detalhes do seu voto e terá a confirmação de que os
+    dados seguem íntegros.
+  </p>
+  <p>
+    Uma informação muito importante exibida após o processo de auditoria é se o voto em
+    questão foi revogado ou se ainda segue ativo. Para garantir que haja somente um voto
+    válido/ativo por usuário por eleição, somente o voto mais recente é considerado,
+    portanto os votos anteriores são revogados sempre que o usuário vota novamente. Então,
+    caso seu voto seja sinalizado como revogado, provavelmente você utilizou um
+    comprovante válido, porém, não o comprovante do seu último voto!
+  </p>
+</section>
+
 <div class="audit-container">
   <div [formGroup]="form" class="form">
     <input formControlName="hash" placeholder="Vote Hash" />
