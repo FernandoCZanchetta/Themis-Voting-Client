@@ -116,12 +116,12 @@ export class AuditComponent implements OnInit {
           this.addToTerminal('>>> Voto Revogado?: ' + res.revoked, 'success')
           this.state = 'done'
         } else {
-          this.addToTerminal('✖ VOTE INVÁLIDO', 'error')
+          this.addToTerminal('✖ VOTO INVÁLIDO', 'error')
           this.state = 'error'
         }
       },
       error: () => {
-        this.addToTerminal('✖ FALHA NA AUDITORIA', 'error')
+        this.addToTerminal('✖ VOTO INVÁLIDO OU FALHA NA AUDITORIA', 'error')
         this.state = 'error'
       },
     })
