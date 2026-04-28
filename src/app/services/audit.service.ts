@@ -13,9 +13,6 @@ export class AuditService {
   constructor(private http: HttpClient) {}
 
   auditVote(data: VoteReceiptData): Observable<AuditVoteResponse> {
-    return this.http.post<AuditVoteResponse>(
-      `${this.baseUrl}/audit`,
-      data
-    )
+    return this.http.post<AuditVoteResponse>(`${this.baseUrl}/audit`, data)
   }
 }

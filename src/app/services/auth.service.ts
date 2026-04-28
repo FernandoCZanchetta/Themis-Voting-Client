@@ -14,12 +14,12 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(nUSP: string, uniquePassword: string) {
-    return this.http.post<LoginResponseModel>(`${this.baseUrl}/auth/login`, {
-      nUSP,
-      uniquePassword,
-    }).pipe(
-      tap(res => this.setToken(res.jwtToken))
-    )
+    return this.http
+      .post<LoginResponseModel>(`${this.baseUrl}/auth/login`, {
+        nUSP,
+        uniquePassword,
+      })
+      .pipe(tap(res => this.setToken(res.jwtToken)))
   }
 
   private setToken(token: string): void {
@@ -32,7 +32,9 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     const token = this.getToken()
-    if (!token) { return false }
+    if (!token) {
+      return false
+    }
 
     try {
       const payload = JSON.parse(atob(token.split('.')[1]))
