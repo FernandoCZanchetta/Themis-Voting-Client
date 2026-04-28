@@ -1,0 +1,241 @@
+<app-page-title></app-page-title>
+
+<section class="text-justify m-auto">
+  <a id="introducao"></a>
+
+  <app-title [subtitle]="true">Themis Voting</app-title>
+  <p>
+    O <strong>Themis Voting</strong> é um sistema de votação discente, baseado, em partes,
+    nas premissas e no funcionamento do
+    <a target="_blank" rel="noopener noreferrer" href="https://vote.usp.br/info">
+      USP Helios Voting</a
+    >, sistema utilizado pela <abbr title="Universidade de São Paulo">USP</abbr> em alguns
+    processos eleitorais, principalmente, nas eleições de representantes discentes!
+  </p>
+  <p>
+    Sendo assim, por que não elaborar um sistema semelhante, porém com acesso facilitado à
+    comunidade dos alunos da universidade? E, agora, este questionamento tem seu fim com o
+    lançamento do Themis, já que, este sistema possibilita a elaboração de quaisquer tipos
+    de votação, desde eleições com candidatos até simples referendos e consultas públicas,
+    bastando ser aluno da USP!
+  </p>
+  <p>
+    Abaixo você poderá encontrar uma breve explicação sobre o funcionamento deste novo
+    sistema de votação! Vale ressaltar, também, que ele é totalmente open source,
+    portanto, tanto o código fonte da
+    <abbr title="Application Programming Interface">API</abbr>, quanto o deste site estão
+    disponíveis para consultas no
+    <a
+      target="_blank"
+      rel="noopener noreferrer"
+      href="https://github.com/FernandoCZanchetta/Themis-Voting/"
+      >GitHub do desenvolvedor</a
+    >.
+  </p>
+
+  <app-groups-panel color="secondary" [size]="30"></app-groups-panel>
+</section>
+
+<section class="text-justify mt-4">
+  <a id="sobre"></a>
+
+  <app-title [subtitle]="true">Sobre</app-title>
+  <p>
+    Bem, antes de mais nada, por que Themis Voting? Themis é a deusa grega da justiça, lei
+    e dos costumes; sendo assim, é a escolha perfeita para nomear um sistema de votação,
+    ainda mais dada a tradição da USP em nomear seus sistemas em homenagem a deuses
+    gregos/romanos. E claro, esse sistema não tem qualquer relação com a USP, porém, o
+    desenvolvedor se permitiu manter essa "tradição"...
+  </p>
+
+  <h4>Funcionamento</h4>
+  <p>
+    Agora, indo um pouco além da questão da nomenclatura, afinal, como funciona o Themis
+    Voting?
+  </p>
+  <p>
+    O sistema é baseado numa premissa de manter o anonimato dos usuários, de forma que,
+    mesmo que alguém tenha acesso aos dados de uma votação, ela não será capaz de mapear
+    os votos em seus respectivos autores. No entanto, isso também não significa que o
+    sistema não implemente garantias básicas visando que cada pessoa somente possa ter um
+    voto ativo e válido para cada votação...
+  </p>
+  <p>
+    Em mais detalhes: como o sistema, a priori, é voltado somente para a comunidade da
+    USP, utilizamos o JupiterWeb para fazer a validação do usuário, tal como o Folki,
+    aplicativo bastante conhecido e utilizado pelos alunos! Nosso intuito com isso é
+    somente obter informações como seu curso e instituto, de forma a permitir que existam
+    votações específicas para determinados públicos. Após essa coleta, seu número USP
+    passa por uma função hash sha-512, antes de ser armazenado, o que torna esse dado
+    praticamente impossível de ser obtido!
+  </p>
+  <p>
+    Após estar logado, você poderá acessar a
+    <a rel="noopener noreferrer" routerLink="/votings">área de votações</a>, onde você
+    encontrará aquelas que estão ativas para você e, ao clicar nelas, você terá acesso a
+    mais detalhes e poderá registrar seu voto se assim desejar! Ao votar, seus dados que
+    já são anônimos se tornam ainda mais, já que é gerado um token que não permite sua
+    identificação direta, mas que pode ser recalculado caso você queira votar novamente,
+    assim você pode votar quantas vezes desejar, sendo que apenas o último voto é
+    considerado válido!
+  </p>
+  <p>E você poderia pensar que isso já é o suficiente, certo?</p>
+  <p>Mas não, além disso, geramos:</p>
+  <ul>
+    <li>um nonce, que nada mais é do que um número aleatório complexo;</li>
+    <li>
+      um hash de toda a sua operação de voto, incluindo informações como id da votação, id
+      da opção de voto em que você votou, o token do eleitor, o nonce e um segredo
+      armazenado no servidor (semelhante a uma senha, muito bem armazenada);
+    </li>
+    <li>
+      uma assinatura para esse hash citado acima, composta por ele, o nonce e outro
+      segredo armazenado no servidor.
+    </li>
+  </ul>
+  <p>
+    Com todas essas informações conseguimos nos prevenir de muitos casos de ataques e
+    tentativas de adulteração das votações! Veja: como emitimos um hash da operação de
+    voto, é possível avaliar se seu voto foi comprometido internamente no servidor, já
+    que, se, porventura, seu voto fosse alterado no mesmo, as informações não iriam ser
+    condizentes com seu comprovante! Além disso, assinar o hash com outro segredo, gerando
+    a assinatura do voto, garante que, casos de tentativa de falsificação do hash serão
+    detectadas facilmente!
+  </p>
+  <h5>Auditoria</h5>
+  <p>
+    Mas tem uma chance de você estar se perguntando agora: "ok, bastante explicação, mas
+    como eu faço para conferir se meu voto é válido e não foi adulterado mesmo?"
+  </p>
+  <p>
+    Para isso temos a
+    <a rel="noopener noreferrer" routerLink="/audit">área de auditoria</a>! Aqui você
+    poderá inserir os dados do seu comprovante de voto (hash, nonce e assinatura) que
+    foram emitidos após você registrar seu voto numa votação, e o sistema faz toda a
+    conferência para checkar se os dados realmente são aqueles que estão presentes no
+    servidor e se houve alguma adulteração!
+  </p>
+  <p>
+    Dessa maneira, você pode obter evidências concretas de uma possível fraude na votação
+    e solicitar alguma auditoria mais profunda! No mais, como utilizamos JupiterWeb para
+    autenticação, é garantido que não haverá influências externas à USP nas votações,
+    ponto que muitas vezes não pode ser garantido em outros tipos de votação ou com uso de
+    métodos mais ineficientes/imprecisos para contagem de votos!
+  </p>
+</section>
+
+<section class="d-flex flex-column gap-1 mb-3 text-justify">
+  <a id="faq"></a>
+
+  <app-title [subtitle]="true">Perguntas Frequentes (FAQ)</app-title>
+  <details>
+    <summary>Meu voto é realmente anônimo?</summary>
+    <p>
+      <strong>Sim!</strong> O sistema não armazena nenhuma informação que permita
+      identificar diretamente quem votou em qual opção, garantindo, então, a segurança das
+      suas informações!
+    </p>
+    <p>
+      Todos os dados que você insere no sistema passam por processos de anonimização antes
+      de serem utilizados, garantindo, assim, que seu voto permaneça secreto.
+    </p>
+  </details>
+
+  <details>
+    <summary>Posso verificar meu voto depois?</summary>
+    <p>
+      <strong>Com certeza!</strong> Após votar, você recebe um comprovante de voto com
+      algumas informações únicas que são capazes de confirmar se seu voto é válido.
+    </p>
+    <p>
+      Utilizando esses dados na
+      <a rel="noopener noreferrer" routerLink="/audit">área de auditoria</a>, você poderá
+      verificar se seu voto está corretamente registrado no sistema.
+    </p>
+    <p>
+      Observação: Na área de auditoria, não recuperamos a informação da sua opção de voto!
+      Fazemos isso para evitar coações ou situações de constrangimento, já que, num caso
+      desse, seria possível ver que você votou, mas não em que/quem, garantindo a
+      inviolabilidade do sigilo do seu voto!
+    </p>
+  </details>
+
+  <details>
+    <summary>O que acontece se eu votar mais de uma vez?</summary>
+    <p>
+      <strong>Se quiser, fique a vontade para votar novamente!</strong>
+    </p>
+    <p>
+      Nosso sistema é pensado para esta situação também, então, no caso de você desejar
+      votar novamente, ou caso tenha mudado de ideia, ou ainda caso tenha esquecido em
+      quem votou e deseja garantir, apenas o <strong>seu voto mais recente</strong> será
+      considerado válido. Isso garante flexibilidade sem comprometer a integridade da
+      votação.
+    </p>
+  </details>
+
+  <details>
+    <summary>Quem pode participar das votações?</summary>
+    <p>
+      As votações são restritas à comunidade autorizada, inicialmente, somente para alunos
+      da USP. Sendo possível ainda haver restrições por curso, instituto ou campus, a
+      depender da necessidade e do público alvo da votação!
+    </p>
+    <p>
+      Para isso, o sistema utiliza validação institucional garantindo que apenas pessoas
+      elegíveis possam participar das votações.
+    </p>
+  </details>
+
+  <details>
+    <summary>Como o sistema protege meu voto?</summary>
+    <p>
+      O Themis Voting utiliza mecanismos de segurança que garantem a integridade do seu
+      voto.
+    </p>
+    <p>
+      Na prática, isso significa que qualquer tentativa de alteração ou fraude pode ser
+      detectada através do seu comprovante (gerado após a votação). Por isso, guarde bem
+      as informações presentes nele para que você possa auditar seu voto depois!
+    </p>
+  </details>
+
+  <details>
+    <summary>O que é o “hash” do meu voto?</summary>
+    <p>
+      Uma boa analogia seria considerar o hash como uma “impressão digital” do seu voto.
+    </p>
+    <p>
+      Ele representa todas as informações da sua votação de forma única, ou seja, se
+      qualquer coisa mudar, o hash também muda. Assim é posível conferir a ocorrência de
+      adulterações nos votos, pois nesse tipo de situação, o hash que você teria guardado
+      no seu comprovante, não seria compatível com o gerado pelos dados do seu voto no
+      servidor...
+    </p>
+  </details>
+
+  <details>
+    <summary>O que é o “nonce”?</summary>
+    <p>
+      Um nonce é um número aleatório gerado para tornar cada voto único e mais seguro.
+    </p>
+    <p>
+      Ele ajuda a evitar tentativas de repetição ou falsificação, já que, como este valor
+      é gerado aleatoriamente, fica muito difícil para uma pessoa repetir dados e esperar
+      um mesmo resultado, ou ainda para tal pessoa tentar obter os segredos armazenados no
+      servidor baseado num conjunto de dados válidos.
+    </p>
+  </details>
+
+  <details>
+    <summary>O que é a “assinatura”?</summary>
+    <p>
+      A assinatura é uma forma de garantir que o seu voto realmente foi gerado pelo
+      sistema e não foi alterado durante a transmissão dos dados.
+    </p>
+    <p>
+      Funciona como uma confirmação de autenticidade, onde há uma maior segurança e
+      garantia de que realmente tudo passou pelo sistema e foi validado corretamente!
+    </p>
+  </details>
+</section>

@@ -1,0 +1,15 @@
+@use '/src/colors';
+@import '/src/styles';
+
+.navbar-dark {
+  background-color: $black;
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+}
+
+.navbar-toggler:hover {
+  @extend .navbar-light;
+  background-color: colors.$primary;
+  transition: 0.5s;
+}
