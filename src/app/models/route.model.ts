@@ -1,7 +1,7 @@
 import { ImageModel } from './image.model'
 
 export interface RouteDataModel {
-  background: ImageModel[]
+  background?: ImageModel[]
   bgDarkness?: string | number
   logo?: ImageModel
   title: string
