@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { Router } from '@angular/router'
 import { AuthService, SidebarService } from '@services'
 
@@ -8,8 +8,6 @@ import { AuthService, SidebarService } from '@services'
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  @Input() isBelowBanner = true
-
   @ViewChild('navbar') navbarRef!: ElementRef
 
   constructor(
@@ -19,19 +17,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    if (this.isBelowBanner) {
-      window.addEventListener('scroll', () => {
-        // if a whole page was scrolled
-        // window.scrollY > window.innerHeight ? this.setSticky() : this.unsetSticky()
-        if (window.scrollY > window.innerHeight) {
-          this.setSticky()
-        } else {
-          this.unsetSticky()
-        }
-      })
-    } else {
-      this.setSticky()
-    }
+    window.addEventListener('scroll', () => {
+      // if a little bit of the page was scrolled
+      // window.scrollY > 25 ? this.setSticky() : this.unsetSticky()
+      if (window.scrollY > 25) {
+        this.setSticky()
+      } else {
+        this.unsetSticky()
+      }
+    })
   }
 
   ngOnDestroy(): void {
