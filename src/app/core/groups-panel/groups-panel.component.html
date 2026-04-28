@@ -1,6 +1,10 @@
 <div class="d-flex flex-column align-items-center gap-2 {{ color }} pb-2">
   <strong style="font-size: {{ size - 5 }}px">
-    {{ groups.length === 1 ? 'INSTAGRAM DA SASEL' : 'INSTAGRAM E WHATSAPP DA SASEL' }}
+    {{
+      groups.length === 1
+        ? 'GITHUB DO DESENVOLVEDOR'
+        : 'GITHUB DO DESENVOLVEDOR E DA SA-SEL'
+    }}
   </strong>
 
   <div class="d-flex justify-content-center align-items-center m-auto gap-5">

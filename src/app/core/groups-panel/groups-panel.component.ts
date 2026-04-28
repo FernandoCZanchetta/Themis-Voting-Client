@@ -15,10 +15,10 @@ export class GroupsPanelComponent implements OnInit {
 
   groups: SocialMediaModel[] = [
     {
-      name: SocialMedia.Instagram,
-      url: 'https://www.instagram.com/sasel.usp/',
+      name: SocialMedia.GitHub,
+      url: 'https://github.com/FernandoCZanchetta/',
       available: true,
     },
-    { name: SocialMedia.WhatsApp, url: '+55 (16) 99619-0880', available: true },
+    { name: SocialMedia.GitHub, url: 'https://github.com/sa-sel', available: true },
   ]
 }
