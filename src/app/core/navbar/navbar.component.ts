@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { Router } from '@angular/router'
-import { SidebarService } from '@services'
+import { AuthService, SidebarService } from '@services'
 
 @Component({
   selector: 'app-navbar',
@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
+    private authService: AuthService,
     private sidebarService: SidebarService
   ) {}
 
@@ -37,12 +38,21 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.unsetSticky()
   }
 
-  openSidebar() {
+  openSidebar(): void {
     this.sidebarService.open()
   }
 
   goToHomepage(): void {
     this.router.navigate(['/'])
+  }
+
+  logout(): void {
+    this.authService.logout()
+    this.router.navigate(['/login'])
+  }
+
+  get isLogged() {
+    return this.authService.isAuthenticated()
   }
 
   private setSticky() {

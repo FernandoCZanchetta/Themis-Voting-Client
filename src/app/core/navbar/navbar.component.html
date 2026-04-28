@@ -7,17 +7,23 @@
       <app-logo class="w-100"></app-logo>
     </button>
 
-    <button
-      (click)="openSidebar()"
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#sidebar"
-      aria-controls="sidebar"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="d-flex align-items-center gap-3">
+      <button *ngIf="isLogged" class="btn btn-outline-danger ms-3" (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+      </button>
+
+      <button
+        (click)="openSidebar()"
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#sidebar"
+        aria-controls="sidebar"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
   </div>
 </nav>
