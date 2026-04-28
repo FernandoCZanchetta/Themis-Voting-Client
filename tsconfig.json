@@ -23,7 +23,7 @@
       "@core": ["core/index.ts"],
       "@guards": ["guards/index.ts"],
       "@interceptors": ["interceptors/index.ts"],
-      "@models": ["models/index.ts"],      
+      "@models": ["models/index.ts"],
       "@pipes": ["pipes/index.ts"],
       "@services": ["services/index.ts"],
       "@shared": ["shared/index.ts"],
