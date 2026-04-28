@@ -24,6 +24,9 @@ const routes: RouteModel[] = [
     path: 'votings',
     component: VotingsComponent,
     canActivate: [AuthGuard],
+    data: {
+      title: 'Votações',
+    },
   },
   {
     path: 'voting/:id',
@@ -33,6 +36,9 @@ const routes: RouteModel[] = [
   {
     path: 'audit',
     component: AuditComponent,
+    data: {
+      title: 'Auditoria',
+    },
   },
   { path: '**', redirectTo: '/' } as any,
 ]
